@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/header/Header.jsx';
 import Calendar from './components/calendar/Calendar.jsx';
 
@@ -7,7 +7,10 @@ import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
 import './common.scss';
 const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
-  const weekDates = generateWeekRange(getWeekStartDate(setWeekStartDate(weekStartDate)));
+  useEffect(() => {
+    setWeekStartDate(weekStartDate);
+  }, [])
+  const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
 
   return (
     <>
@@ -15,9 +18,9 @@ const App = () => {
       <Calendar weekDates={weekDates} />
     </>
   );
-}
+} 
 
-/*class App extends Component {
+/* class App extends Component {
   state = {
     weekStartDate: new Date(),
   };
@@ -33,6 +36,5 @@ const App = () => {
       </>
     );
   }
-}*/
-
+} */
 export default App;
