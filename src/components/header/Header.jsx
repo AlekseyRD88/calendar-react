@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import { getWeekStartDate, generateWeekRange } from '../../../src/utils/dateUtils.js';
 import './header.scss';
 
@@ -15,10 +16,10 @@ const Header = () => {
       </button>
       <div className="navigation">
         <button className="navigation__today-btn button">Today</button>
-        <button className="icon-button navigation__nav-icon" onClick={weekDates - 7}>
+        <button className="icon-button navigation__nav-icon" onClick={moment(weekDates).subtract(7, 'days')}>
           <i className="fas fa-chevron-left"></i>
         </button>
-        <button className="icon-button navigation__nav-icon" onClick={weekDates + 7}>
+        <button className="icon-button navigation__nav-icon" onClick={moment(weekDates).add(7, 'days')}>
           <i className="fas fa-chevron-right"></i>
         </button>
         <span className="navigation__displayed-month"></span>
