@@ -9,6 +9,14 @@ const Header = () => {
     setWeekStartDate(weekStartDate);
   }, [])
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
+  const [weekDatesForward, setWeekDatesForward] = useState(weekDates);
+  useEffect(() => {
+    setWeekDatesForward(moment(weekDatesForward).add(7, 'days'))
+  });
+  const [weekDatesPast, setWeekDatesPast] = useState(weekDates);
+  useEffect(() => {
+    setWeekDatesPast(moment(weekDatesPast).subtract(7, 'days'))
+  });
   return (
     <header className="header">
       <button className="button create-event-btn">
@@ -16,10 +24,10 @@ const Header = () => {
       </button>
       <div className="navigation">
         <button className="navigation__today-btn button">Today</button>
-        <button className="icon-button navigation__nav-icon" onClick={moment(weekDates).subtract(7, 'days')}>
+        <button className="icon-button navigation__nav-icon" onClick={weekDatesPast}>
           <i className="fas fa-chevron-left"></i>
         </button>
-        <button className="icon-button navigation__nav-icon" onClick={moment(weekDates).add(7, 'days')}>
+        <button className="icon-button navigation__nav-icon" onClick={weekDatesForward}>
           <i className="fas fa-chevron-right"></i>
         </button>
         <span className="navigation__displayed-month"></span>
