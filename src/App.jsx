@@ -17,28 +17,10 @@ const App = () => {
       <Header 
       weekStartDate={weekStartDate}
       setWeekStartDate={setWeekStartDate}
-      //weekDates={weekDates}
       />
       <Calendar weekDates={weekDates} />
     </>
   );
 } 
 
-/* class App extends Component {
-  state = {
-    weekStartDate: new Date(),
-  };
-
-  render() {
-    const { weekStartDate } = this.state;
-    const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
-
-    return (
-      <>
-        <Header />
-        <Calendar weekDates={weekDates} />
-      </>
-    );
-  }
-} */
 export default App;
