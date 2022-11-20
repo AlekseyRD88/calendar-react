@@ -11,7 +11,7 @@ const Calendar = ({weekDates}) => {
   const [event, setEvents] = useState(events);
   useEffect(() => {
     setEvents(event);
-  }, [])
+  }, []);
   return (
     <section className="calendar">
       <Navigation weekDates={weekDates} />

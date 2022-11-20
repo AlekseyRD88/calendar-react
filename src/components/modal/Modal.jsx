@@ -1,18 +1,30 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 
 import './modal.scss';
 
 const Modal = ({handleChange, closeModal}) => {
+  const [value, setValue] = useState({
+    id: Math.random(),
+    title: '',
+    description: '',
+    dateFrom: new Date(),
+    dateTo: new Date(),
+  });
+  const form = useRef(null);
   handleChange = event => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    value = new formData(form.current);
+    setValue(value);
+  }
+  handleTaskCreate = () => {
+    onCreate(value);
   }
   return (
     <div className="modal overlay">
       <div className="modal__content">
         <div className="create-event">
           <button className="create-event__close-btn" onClick={() => closeModal(false)}>+</button>
-          <form className="event-form">
+          <form className="event-form" ref={form} onSubmit={handleChange}>
             <input
               type="text"
               name="title"
@@ -25,7 +37,7 @@ const Modal = ({handleChange, closeModal}) => {
                 type="time"
                 name="startTime"
                 className="event-form__field"
-                onChange={handleChange}
+                // onChange={handleChange}
               />
               <span>-</span>
               <input
@@ -39,7 +51,7 @@ const Modal = ({handleChange, closeModal}) => {
               placeholder="Description"
               className="event-form__field"
             ></textarea>
-            <button type="submit" className="event-form__submit-btn">
+            <button type="submit" className="event-form__submit-btn" onClick={handleTaskCreate}>
               Create
             </button>
           </form>
