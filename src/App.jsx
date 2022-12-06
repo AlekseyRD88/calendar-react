@@ -22,7 +22,7 @@ const App = () => {
       startTime: new Date(),
       endTime: new Date(),
     });  
-    //setNewEvent(event([name]: value));
+    setNewEvent(event({name: value}));
     const [task, setTask] = useState(events);
     setTask(task.concat(newEvent));
     
@@ -36,6 +36,7 @@ const App = () => {
       weekStartDate={weekStartDate}
       setWeekStartDate={setWeekStartDate}
       handleChange={handleChange}
+      handleSubmit={handleSubmit}
       />
       <Calendar weekDates={weekDates} />
     </>
