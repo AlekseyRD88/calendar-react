@@ -1,20 +1,40 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import './modal.scss';
 
-const Modal = ({handleChange, handleSubmit, closeModal}) => {
+const Modal = ({closeModal, task, setTask}) => {
+  const [formState, setFormState] = useState({
+    id: Math.random(),
+    title: '',
+    description: '',
+    date: moment().format('YYYY-MM-DD'),
+    startTime: moment().format('HH:mm'),
+    endTime: moment().add(15, 'minutes').format('HH:mm'),
+  });
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setFormState({ ...formState, [name]: value });
+  };
+  const handleSubmit = e => {
+    e.preventDefault();
+    const { tasks } = setTask(task);
+    const updatedTasks = tasks.concat(formState);
+    useEffect(() => {
+      setTask(task(updatedTasks));
+    }, []);
+  }
   return (
     <div className="modal overlay">
       <div className="modal__content">
         <div className="create-event">
           <button className="create-event__close-btn" onClick={() => closeModal(false)}>+</button>
-          <form className="event-form" onSubmit={handleSubmit}>
+          <form className="event-form">
             <input
               type="text"
               name="title"
               placeholder="Title"
               className="event-form__field"
-              value={title}
+              value={formState.title}
               onChange={handleChange}
             />
             <div className="event-form__time">
@@ -23,7 +43,7 @@ const Modal = ({handleChange, handleSubmit, closeModal}) => {
                 type="time"
                 name="startTime"
                 className="event-form__field"
-                value={startTime}
+                value={formState.startTime}
                 onChange={handleChange}
               />
               <span>-</span>
@@ -31,7 +51,7 @@ const Modal = ({handleChange, handleSubmit, closeModal}) => {
                 type="time"
                 name="endTime"
                 className="event-form__field"
-                value={endTime}
+                value={formState.endTime}
                 onChange={handleChange}
               />
             </div>
@@ -39,10 +59,10 @@ const Modal = ({handleChange, handleSubmit, closeModal}) => {
               name="description"
               placeholder="Description"
               className="event-form__field"
-              value={description}
+              value={formState.description}
               onChange={handleChange}
             ></textarea>
-            <button type="submit" className="event-form__submit-btn">
+            <button type="submit" className="event-form__submit-btn" onSubmit={handleSubmit}>
               Create
             </button>
           </form>

@@ -13,7 +13,7 @@ const Header = ({weekStartDate, setWeekStartDate}) => {
       <button className="button create-event-btn" onClick={() => {setOpenModal(true)}}>
         <i className="fas fa-plus create-event-btn__icon"></i>Create
       </button>
-      {openModal && <Modal closeModal={setOpenModal} handleChange={handleChange}/>}
+      {openModal && <Modal closeModal={setOpenModal} />}
       <div className="navigation">
         <button className="navigation__today-btn button" onClick={() => setWeekStartDate(new Date())}>Today</button>
         <button className="icon-button navigation__nav-icon" onClick={() => setWeekStartDate(new Date(weekStartDate.setDate(weekStartDate.getDate() - 7)))}>

@@ -13,7 +13,11 @@ const App = () => {
     setWeekStartDate(weekStartDate);
   }, []);
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
-  handleChange = event => {
+  const [task, setTask] = useState(events);
+  useEffect(() => {
+    setTask(task);
+  }, []);
+  /*handleChange = event => {
     const { name, value } = event.target;
     const [newEvent, setNewEvent] = useState({
       id: Math.random(),
@@ -29,14 +33,14 @@ const App = () => {
   }
   handleSubmit = event => {
     event.preventDefault();
-  }
+  }*/
   return (
     <>
       <Header 
       weekStartDate={weekStartDate}
       setWeekStartDate={setWeekStartDate}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
+      task={task}
+      setTask={task}
       />
       <Calendar weekDates={weekDates} />
     </>
