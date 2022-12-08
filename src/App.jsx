@@ -24,9 +24,9 @@ const App = () => {
       weekStartDate={weekStartDate}
       setWeekStartDate={setWeekStartDate}
       task={task}
-      setTask={task}
+      setTask={setTask}
       />
-      <Calendar weekDates={weekDates} />
+      <Calendar weekDates={weekDates} task={task} setTask={setTask}/>
     </>
   );
 } 

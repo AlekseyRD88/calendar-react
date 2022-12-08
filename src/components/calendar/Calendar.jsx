@@ -7,7 +7,7 @@ import events from '../../gateway/events';
 
 import './calendar.scss';
 
-const Calendar = ({weekDates}) => {
+const Calendar = ({weekDates, task, setTask}) => {
   const [event, setEvents] = useState(events);
   useEffect(() => {
     setEvents(event);
@@ -18,7 +18,7 @@ const Calendar = ({weekDates}) => {
       <div className="calendar__body">
         <div className="calendar__week-container">
           <Sidebar />
-          <Week weekDates={weekDates} events={event} />
+          <Week weekDates={weekDates} events={task} setTask={setTask}/>
         </div>
       </div>
     </section>
