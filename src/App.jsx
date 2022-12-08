@@ -17,23 +17,7 @@ const App = () => {
   useEffect(() => {
     setTask(task);
   }, []);
-  /*handleChange = event => {
-    const { name, value } = event.target;
-    const [newEvent, setNewEvent] = useState({
-      id: Math.random(),
-      title: '',
-      description: '',
-      startTime: new Date(),
-      endTime: new Date(),
-    });  
-    setNewEvent(event({name: value}));
-    const [task, setTask] = useState(events);
-    setTask(task.concat(newEvent));
-    
-  }
-  handleSubmit = event => {
-    event.preventDefault();
-  }*/
+  
   return (
     <>
       <Header 

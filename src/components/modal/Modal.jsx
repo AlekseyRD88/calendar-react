@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import './modal.scss';
 
-const Modal = ({closeModal, task, setTask}) => {
+const Modal = ( { closeModal, task, setTask} ) => {
   const [formState, setFormState] = useState({
     id: Math.random(),
     title: '',
@@ -17,11 +17,8 @@ const Modal = ({closeModal, task, setTask}) => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    const { tasks } = setTask(task);
-    const updatedTasks = tasks.concat(formState);
-    useEffect(() => {
-      setTask(task(updatedTasks));
-    }, []);
+    setTask([...task, formState]);
+    closeModal(false);
   }
   return (
     <div className="modal overlay">
