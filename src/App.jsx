@@ -13,9 +13,9 @@ const App = () => {
     setWeekStartDate(weekStartDate);
   }, []);
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
-  const [task, setTask] = useState(events);
+  const [tasks, setTasks] = useState(events);
   useEffect(() => {
-    setTask(task);
+    setTasks(tasks);
   }, []);
   
   return (
@@ -23,10 +23,10 @@ const App = () => {
       <Header 
       weekStartDate={weekStartDate}
       setWeekStartDate={setWeekStartDate}
-      task={task}
-      setTask={setTask}
+      tasks={tasks}
+      setTasks={setTasks}
       />
-      <Calendar weekDates={weekDates} task={task} setTask={setTask}/>
+      <Calendar weekDates={weekDates} tasks={tasks} setTasks={setTasks}/>
     </>
   );
 } 

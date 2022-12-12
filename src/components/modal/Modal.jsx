@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import './modal.scss';
 
-const Modal = ( { closeModal, task, setTask} ) => {
+const Modal = ( { closeModal, tasks, setTasks} ) => {
   const [formState, setFormState] = useState({
     id: Math.random(),
     title: '',
@@ -17,7 +17,7 @@ const Modal = ( { closeModal, task, setTask} ) => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    setTask([...task, formState]);
+    setTasks([...tasks, formState]);
     closeModal(false);
   }
   return (
