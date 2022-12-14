@@ -17,7 +17,12 @@ const App = () => {
   useEffect(() => {
     setTasks(tasks);
   }, []);
-  
+  const handleEventDelete = (id) => {
+    const updatedTasks = tasks.filter(task => task.id !== id);
+    useEffect(() => {
+      setTasks(tasks(updatedTasks));
+    }, []);
+  }
   return (
     <>
       <Header 
@@ -26,7 +31,7 @@ const App = () => {
       tasks={tasks}
       setTasks={setTasks}
       />
-      <Calendar weekDates={weekDates} tasks={tasks} setTasks={setTasks}/>
+      <Calendar weekDates={weekDates} tasks={tasks} setTasks={setTasks} handleEventDelete={handleEventDelete}/>
     </>
   );
 } 

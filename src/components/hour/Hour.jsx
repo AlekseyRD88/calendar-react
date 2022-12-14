@@ -3,7 +3,9 @@ import React from 'react';
 import Event from '../event/Event';
 import { formatMins } from '../../../src/utils/dateUtils.js';
 
-const Hour = ({ dataHour, hourEvents }) => {
+
+const Hour = ({ dataHour, hourEvents, handleEventDelete }) => {
+  
   return (
     <div className="calendar__time-slot" data-time={dataHour + 1}>
       {/* if no events in the current hour nothing will render here */}
@@ -23,6 +25,7 @@ const Hour = ({ dataHour, hourEvents }) => {
             marginTop={dateFrom.getMinutes()}
             time={`${eventStart} - ${eventEnd}`}
             title={title}
+            onDelete={handleEventDelete}
           />
         );
       })}

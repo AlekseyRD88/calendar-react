@@ -47,7 +47,7 @@ const Modal = ( { closeModal, tasks, setTasks} ) => {
               <input type="date" name="date" className="event-form__field" value={formState.date} onChange={handleChange}/>
               <input
                 type="time"
-                name="dateFrom"
+                name="startTime"
                 className="event-form__field"
                 value={formState.startTime}
                 onChange={handleChange}
@@ -55,7 +55,7 @@ const Modal = ( { closeModal, tasks, setTasks} ) => {
               <span>-</span>
               <input
                 type="time"
-                name="dateTo"
+                name="endTime"
                 className="event-form__field"
                 value={formState.endTime}
                 onChange={handleChange}

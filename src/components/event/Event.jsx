@@ -2,7 +2,7 @@ import React from 'react';
 
 import './event.scss';
 
-const Event = ({ height, marginTop, title, time }) => {
+const Event = ({ height, marginTop, title, time, onDelete }) => {
   const eventStyle = {
     height,
     marginTop,
@@ -12,6 +12,7 @@ const Event = ({ height, marginTop, title, time }) => {
     <div style={eventStyle} className="event">
       <div className="event__title">{title}</div>
       <div className="event__time">{time}</div>
+      <button className="delete-event-btn" onClick={() => onDelete(id)}></button>
     </div>
   );
 };
