@@ -9,15 +9,24 @@ const Modal = ( { closeModal, tasks, setTasks} ) => {
     description: '',
     date: moment().format('YYYY-MM-DD'),
     startTime: moment().format('HH:mm'),
-    endTime: moment().add(15, 'minutes').format('HH:mm'),
+    endTime: moment().add(30, 'minutes').format('HH:mm'),
   });
   const handleChange = e => {
+    e.preventDefault();
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
   };
   const handleSubmit = e => {
     e.preventDefault();
-    setTasks([...tasks, formState]);
+    const { title, description, date, startTime, endTime } = formState;
+    setTasks([...tasks, {
+      id: Math.random(),
+      title,
+      description,
+      dateFrom: new Date(`${date} ${startTime} `),
+      dateTo: new Date(`${date} ${endTime}`),
+    },
+    ]);
     closeModal(false);
   }
   return (
@@ -35,10 +44,10 @@ const Modal = ( { closeModal, tasks, setTasks} ) => {
               onChange={handleChange}
             />
             <div className="event-form__time">
-              <input type="date" name="date" className="event-form__field" />
+              <input type="date" name="date" className="event-form__field" value={formState.date} onChange={handleChange}/>
               <input
                 type="time"
-                name="startTime"
+                name="dateFrom"
                 className="event-form__field"
                 value={formState.startTime}
                 onChange={handleChange}
@@ -46,7 +55,7 @@ const Modal = ( { closeModal, tasks, setTasks} ) => {
               <span>-</span>
               <input
                 type="time"
-                name="endTime"
+                name="dateTo"
                 className="event-form__field"
                 value={formState.endTime}
                 onChange={handleChange}
@@ -59,7 +68,7 @@ const Modal = ( { closeModal, tasks, setTasks} ) => {
               value={formState.description}
               onChange={handleChange}
             ></textarea>
-            <button type="submit" className="event-form__submit-btn" onSubmit={handleSubmit}>
+            <button type="submit" className="event-form__submit-btn" onClick={handleSubmit}>
               Create
             </button>
           </form>
