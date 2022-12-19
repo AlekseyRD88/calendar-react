@@ -29,6 +29,7 @@ const Hour = ({ dataHour, hourEvents, tasks, setTasks }) => {
             time={`${eventStart} - ${eventEnd}`}
             title={title}
             onDelete={handleEventDelete}
+            id={id}
           />
         );
       })}
