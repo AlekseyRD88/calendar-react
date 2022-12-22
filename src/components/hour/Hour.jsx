@@ -2,17 +2,19 @@ import React from 'react';
 import classNames from 'classnames';
 import Event from '../event/Event';
 import { formatMins } from '../../../src/utils/dateUtils.js';
+import { fetchTasks, deleteTask } from '../../gateway/events';
 
 
 
 
-const Hour = ({ dataHour, hourEvents, tasks, setTasks }) => {
+const Hour = ({ dataHour, hourEvents, dataDay, tasks, setTasks }) => {
   const date = new Date();
-  const hourClasses = classNames('calendar__time-slot', {'red-line': dataHour === date.getHours()});
+  const hourClasses = classNames('calendar__time-slot', {'red-line': dataHour === date.getHours() && dataDay === date.getDate()});
   const handleEventDelete = (id) => {
-    const updatedTasks = tasks.filter(task => task.id !== id);
-    setTasks(updatedTasks);
-  } 
+    deleteTask(id).then(() => fetchTasks());
+    /*const updatedTasks = tasks.filter(task => task.id !== id);
+    setTasks(updatedTasks);*/
+  };
   return (
     <div className={hourClasses} data-time={dataHour + 1}>
       {/* if no events in the current hour nothing will render here */}

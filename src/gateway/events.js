@@ -1,4 +1,4 @@
-const events = [
+/*const events = [
   {
     id: 1,
     title: 'Go to the gym',
@@ -29,4 +29,35 @@ const events = [
   },
 ];
 
-export default events;
+export default events;*/
+const baseUrl = 'https://63a44b592a73744b007325d1.mockapi.io/events';
+export const createTask = (taskData) => {
+  return fetch(baseUrl, {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json;utc-8',
+    },
+    body: JSON.stringify(taskData)
+}).then(response => {
+  if (!response.ok) {
+    throw new Error('Internal Server Error. Can\'t display events');
+  }
+  });
+}
+export const deleteTask = (id) => {
+  return fetch(`${baseUrl}/${id}`, {
+    method: 'DELETE'
+  }).then(response => {
+    if (!response.ok) {
+      throw new Error('Internal Server Error. Can\'t display events');      
+    }
+  });
+}
+
+export const fetchTasks = () => {
+    return fetch(baseUrl).then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+    }).then(tasks => tasks);
+  };

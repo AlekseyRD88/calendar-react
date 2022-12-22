@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import './modal.scss';
-
+import { fetchTasks, createTask } from '../../gateway/events';
 const Modal = ( { closeModal, tasks, setTasks} ) => {
+  useEffect(() => fetchTasks());
+  const fetchEvents = fetchTasks().then(tasks => setTasks(tasks));
   const [formState, setFormState] = useState({
     id: Math.random(),
     title: '',
@@ -28,6 +30,10 @@ const Modal = ( { closeModal, tasks, setTasks} ) => {
     },
     ]);
     closeModal(false);
+    
+    createTask(tasks).then(() => {
+      fetchEvents();
+    })
   }
   return (
     <div className="modal overlay">
