@@ -12,10 +12,10 @@ const App = () => {
     setWeekStartDate(weekStartDate);
   }, []);
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
-  const [tasks, setTasks] = useState('');
-  useEffect(() => {
+  const [tasks, setTasks] = useState([]);
+  /*useEffect(() => {
     setTasks(tasks);
-  }, []);
+  }, []);*/
   
   return (
     <>
