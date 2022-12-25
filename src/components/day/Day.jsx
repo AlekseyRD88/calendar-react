@@ -2,7 +2,7 @@ import React from 'react';
 import Hour from '../hour/Hour';
 import './day.scss';
 
-const Day = ({ dataDay, dayEvents, tasks, setTasks }) => {
+const Day = ({ dataDay, dayEvents, tasks, setTasks, fetchEvents }) => {
   const hours = Array(24)
     .fill()
     .map((val, index) => index);
@@ -16,7 +16,7 @@ const Day = ({ dataDay, dayEvents, tasks, setTasks }) => {
         );
 
         return (
-          <Hour key={dataDay + hour} dataHour={hour} hourEvents={hourEvents} tasks={tasks} setTasks={setTasks} dataDay={dataDay}/>
+          <Hour key={dataDay + hour} dataHour={hour} hourEvents={hourEvents} tasks={tasks} setTasks={setTasks} dataDay={dataDay} fetchEvents={fetchEvents}/>
         );
       })}
     </div>

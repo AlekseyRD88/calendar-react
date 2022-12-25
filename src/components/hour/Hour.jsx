@@ -2,16 +2,16 @@ import React from 'react';
 import classNames from 'classnames';
 import Event from '../event/Event';
 import { formatMins } from '../../../src/utils/dateUtils.js';
-import { fetchTasks, deleteTask } from '../../gateway/events';
+import { fetchEventsList, deleteEvent } from '../../gateway/events';
 
 
 
 
-const Hour = ({ dataHour, hourEvents, dataDay, tasks, setTasks }) => {
+const Hour = ({ dataHour, hourEvents, dataDay, tasks, setTasks, fetchEvents }) => {
   const date = new Date();
   const hourClasses = classNames('calendar__time-slot', {'red-line': dataHour === date.getHours() && dataDay === date.getDate()});
   const handleEventDelete = (id) => {
-    deleteTask(id).then(() => fetchTasks());
+    deleteEvent(id).then(() => fetchEvents());
     /*const updatedTasks = tasks.filter(task => task.id !== id);
     setTasks(updatedTasks);*/
   };

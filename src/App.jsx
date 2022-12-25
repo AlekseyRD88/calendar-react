@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/header/Header.jsx';
 import Calendar from './components/calendar/Calendar.jsx';
-import events from './gateway/events';
+import { fetchEventsList } from './gateway/events';
 import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
 import './common.scss';
 
@@ -13,9 +13,14 @@ const App = () => {
   }, []);
   const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
   const [tasks, setTasks] = useState([]);
-  /*useEffect(() => {
-    setTasks(tasks);
-  }, []);*/
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+  const fetchEvents = () => {
+    fetchEventsList().then(eventsList => {
+      setTasks(eventsList)
+    })
+  }
   
   return (
     <>
@@ -24,8 +29,9 @@ const App = () => {
       setWeekStartDate={setWeekStartDate}
       tasks={tasks}
       setTasks={setTasks}
+      fetchEvents={fetchEvents}
       />
-      <Calendar weekDates={weekDates} tasks={tasks} setTasks={setTasks} />
+      <Calendar weekDates={weekDates} tasks={tasks} setTasks={setTasks} fetchEvents={fetchEvents}/>
     </>
   );
 } 

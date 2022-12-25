@@ -31,20 +31,20 @@
 
 export default events;*/
 const baseUrl = 'https://63a44b592a73744b007325d1.mockapi.io/events';
-export const createTask = (taskData) => {
+export const createEvent = (eventData) => {
   return fetch(baseUrl, {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json;utc-8',
     },
-    body: JSON.stringify(taskData)
+    body: JSON.stringify(eventData)
 }).then(response => {
   if (!response.ok) {
     throw new Error('Internal Server Error. Can\'t display events');
   }
   });
 }
-export const deleteTask = (id) => {
+export const deleteEvent = (id) => {
   return fetch(`${baseUrl}/${id}`, {
     method: 'DELETE'
   }).then(response => {
@@ -54,10 +54,10 @@ export const deleteTask = (id) => {
   });
 }
 
-export const fetchTasks = () => {
+export const fetchEventsList = () => {
     return fetch(baseUrl).then(res => {
       if (res.ok) {
         return res.json();
       }
-    }).then(tasks => tasks);
+    })
   };
