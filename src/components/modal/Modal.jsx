@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import './modal.scss';
 import { createEvent } from '../../gateway/events';
+import PropTypes from 'prop-types';
+
 const Modal = ( { closeModal, tasks, setTasks, fetchEvents} ) => {
   const [formState, setFormState] = useState({
     id: Math.random(),
@@ -11,11 +13,17 @@ const Modal = ( { closeModal, tasks, setTasks, fetchEvents} ) => {
     startTime: moment().format('HH:mm'),
     endTime: moment().add(30, 'minutes').format('HH:mm'),
   });
+  
+
   const handleChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
+    createEvent(formState).then(() => {
+      fetchEvents();
+    });
   };
+  
   const handleSubmit = e => {
     e.preventDefault();
     const { title, description, date, startTime, endTime } = formState;
@@ -28,10 +36,6 @@ const Modal = ( { closeModal, tasks, setTasks, fetchEvents} ) => {
     },
     ]);
     closeModal(false);
-    
-    createEvent(tasks).then(() => {
-      fetchEvents();
-    })
   }
   return (
     <div className="modal overlay">
@@ -81,6 +85,18 @@ const Modal = ( { closeModal, tasks, setTasks, fetchEvents} ) => {
     </div>
   );
 }
-
-
+/*
+tasks.PropTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  dateFrom: PropTypes.string.isRequired,
+  dateTo: PropTypes.string.isRequired,
+}
+tasks.defaultProps = {
+  title: '',
+  dateFrom: new Date(`${date} ${startTime} `),
+  dateTo: new Date(`${date} ${endTime}`),
+}
+*/
 export default Modal;

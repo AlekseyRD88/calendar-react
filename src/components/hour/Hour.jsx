@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import Event from '../event/Event';
 import { formatMins } from '../../../src/utils/dateUtils.js';
-import { fetchEventsList, deleteEvent } from '../../gateway/events';
+import { deleteEvent } from '../../gateway/events';
 
 
 
