@@ -19,15 +19,13 @@ const Modal = ( { closeModal, tasks, setTasks, fetchEvents} ) => {
     e.preventDefault();
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
-    createEvent(formState).then(() => {
-      fetchEvents();
-    });
+    
   };
   
   const handleSubmit = e => {
     e.preventDefault();
     const { title, description, date, startTime, endTime } = formState;
-    setTasks([...tasks, {
+    const updatedEvent = setTasks([...tasks, {
       id: Math.random(),
       title,
       description,
@@ -35,6 +33,9 @@ const Modal = ( { closeModal, tasks, setTasks, fetchEvents} ) => {
       dateTo: new Date(`${date} ${endTime}`),
     },
     ]);
+    createEvent(updatedEvent).then(() => {
+      fetchEvents();
+    });
     closeModal(false);
   }
   return (
