@@ -1,26 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Navigation from './../navigation/Navigation';
 import Week from '../week/Week';
 import Sidebar from '../sidebar/Sidebar';
-import events from '../../gateway/events';
-
+import PropTypes from 'prop-types';
 import './calendar.scss';
 
-const Calendar = ({weekDates, tasks, setTasks, fetchEvents }) => {
+
+const Calendar = ({weekDates, events, onDelete, changeModal }) => {
   return (
     <section className="calendar">
       <Navigation weekDates={weekDates} />
       <div className="calendar__body">
         <div className="calendar__week-container">
           <Sidebar />
-          <Week weekDates={weekDates} tasks={tasks} setTasks={setTasks} fetchEvents={fetchEvents}/>
+          <Week 
+          weekDates={weekDates} 
+          events={events}  
+          onDelete={onDelete} 
+          changeModal={changeModal}
+          />
         </div>
       </div>
     </section>
   );
 }
 
-
+Calendar.propTypes = {
+  weekDates: PropTypes.array.isRequired,
+  events: PropTypes.array,
+  onDelete: PropTypes.func.isRequired,
+  changeModal: PropTypes.func
+};
 
 
 export default Calendar;

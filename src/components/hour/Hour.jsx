@@ -2,19 +2,13 @@ import React from 'react';
 import classNames from 'classnames';
 import Event from '../event/Event';
 import { formatMins } from '../../../src/utils/dateUtils.js';
-import { deleteEvent } from '../../gateway/events';
+import PropTypes from 'prop-types';
+import './hour.scss';
 
-
-
-
-const Hour = ({ dataHour, hourEvents, dataDay, tasks, setTasks, fetchEvents }) => {
+const Hour = ({ dataHour, hourEvents, dataDay, onDelete, closeModal }) => {
   const date = new Date();
   const hourClasses = classNames('calendar__time-slot', {'red-line': dataHour === date.getHours() && dataDay === date.getDate()});
-  const handleEventDelete = (id) => {
-    deleteEvent(id).then(() => fetchEvents());
-    /*const updatedTasks = tasks.filter(task => task.id !== id);
-    setTasks(updatedTasks);*/
-  };
+  
   return (
     <div className={hourClasses} data-time={dataHour + 1}>
       {/* if no events in the current hour nothing will render here */}
@@ -34,13 +28,21 @@ const Hour = ({ dataHour, hourEvents, dataDay, tasks, setTasks, fetchEvents }) =
             marginTop={dateFrom.getMinutes()}
             time={`${eventStart} - ${eventEnd}`}
             title={title}
-            onDelete={handleEventDelete}
+            onDelete={onDelete}
+            closeModal={closeModal}
             id={id}
           />
         );
       })}
     </div>
   );
+};
+
+Hour.propTypes = {
+  dataHour: PropTypes.number.isRequired,
+  hourEvents: PropTypes.array,
+  onDelete: PropTypes.func,
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default Hour;
