@@ -9,7 +9,7 @@ export const fetchEventsList = () => {
   .then(eventsList => eventsList.map(event => ({
       ...event,
       dateFrom: new Date(event.dateFrom),
-      dateTo: new Date(event.DateTo),
+      dateTo: new Date(event.dateTo),
     })),
     );
 };

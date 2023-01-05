@@ -37,7 +37,6 @@ Week.propTypes = {
   weekDates: PropTypes.array.isRequired,
   events: PropTypes.array,
   onDelete: PropTypes.func,
-  // getOnClickDate: PropTypes.func.isRequired,
   changeModal: PropTypes.func.isRequired,
 };
 

@@ -5,7 +5,6 @@ import './modal.scss';
 
 const Modal = ({ closeModal, onCreateEvent }) => {
   const [formState, setFormState] = useState({
-    //id: Math.random(),
     title: '',
     description: '',
     date: moment().format('YYYY-MM-DD'),
